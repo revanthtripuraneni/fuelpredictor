@@ -52,7 +52,7 @@ body {
           <br><br>
 
 					<div class="container-login100-form-btn">
-						<p><font color = "red">${error}</font></p>
+						<p><font color = "red">${error}</font></p><br>
 						<button type="Submit" class="btn btn-primary btn-lg">Submit</button>
 					</div>
 				</form>

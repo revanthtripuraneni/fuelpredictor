@@ -61,24 +61,24 @@
           <div class="form-group">
               <label for="del_date">Delivery Date</label>
               <input type="date" class="form-control" id="del_date" name = "del_date" value=${date} required/>
-              <p><font color = "red">${message}</font></p><br>
           </div>
 
 					<div class="form-group">
               <label for="sug_price">Suggested Price</label>
-              <input type="Name" class="form-control" id="sug_price" name = "sug_price" readonly>
+              <input type="Name" class="form-control" id="sug_price" name = "sug_price" value=${price} readonly>
           </div>
 
 					<div class="form-group">
+							<p><font color = "red">${message}</font></p><br>
 							<label for="total_amt">Total Amount Due</label>
-							<input type="Name" class="form-control" id="total_amt" name="total_amt" readonly="readonly">
+							<input type="Name" class="form-control" id="total_amt" name="total_amt" value=${total} readonly="readonly">
 					</div>
 					
 					
 
 					<div class="container-login100-form-btn">
 						<!--  <button type="Submit" class="btn btn-primary btn-lg">Submit</button>-->
-						<input type="Submit" name = "action" value = "Get Price" id="GP" class="btn btn-primary btn-lg" style="margin-right: 30px"></button><br><br>
+						<input type="Submit" name = "action" value = "Get Price" class="btn btn-primary btn-lg" style="margin-right: 30px"></button><br><br>
 						<input type="Submit" name = "action" id="sub" value = "Submit" class="btn btn-primary btn-lg"></button>
 					</div>
 				</form>

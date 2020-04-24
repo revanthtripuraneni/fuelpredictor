@@ -16,7 +16,7 @@ public class LoginPage {
 		int flag = user.isValidUser("CorrectUser", "Correctpassword");
 		assertEquals(2,flag);
 	}
-	
+}
 	
 	/*public void isPasswordValid() {
 		UserValidation user = new UserValidation();

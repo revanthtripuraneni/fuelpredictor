@@ -1,27 +1,81 @@
 package fuel_predictor_project;
 
+import java.sql.*;
+
 public class NewUserValidation {
 	
-	public boolean newUserValidation1(String username)
+	public int newUserValidation1(String username)
 	{
-		String[] uname = {"TestUser","TestUser1","TestUser2","UserExists"};
-		int flag = 0;
-		for(int i=0;i<uname.length;i++)
-		{
-			if(username.equals(uname[i]))
-			{
-				flag = 1;
-				break;
+		Connection conn = null;
+		int flag = -1;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fuel_predictor","root","Mypassword@19");
+			Statement st = conn.createStatement();
+			String query = "select * from users where username='"+username+"'";
+			ResultSet rs = st.executeQuery(query);
+			if(rs.next()) {
+				System.out.println("User Exists=======================================================");
+				return 0;
 			}
-			
+			else {
+				System.out.println("Not Exists*********************************************************");
+				return 1;
+			}
+
 		}
-		if(flag == 1)
-		{
-			return false;
-			
+		catch(Exception e) {
+			System.out.println("Database Error");
+			e.printStackTrace();
 		}
-		else
-			return true;
+		finally{
+		      //finally block used to close resources
+		      try{
+		         if(conn!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		}
+
+		return flag;
+	}
+	
+	public int profileValidation(String username)
+	{
+		Connection conn = null;
+		int flag = -1;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fuel_predictor","root","Mypassword@19");
+			Statement st = conn.createStatement();
+			String query = "select * from profile where username='"+username+"'";
+			ResultSet rs = st.executeQuery(query);
+			if(rs.next()) {
+				System.out.println("Profile Exists=======================================================");
+				return 0;
+			}
+			else {
+				System.out.println("Profile Does'nt Exists*********************************************************");
+				return 1;
+			}
+
+		}
+		catch(Exception e) {
+			System.out.println("Database Error");
+			e.printStackTrace();
+		}
+		finally{
+		      //finally block used to close resources
+		      try{
+		         if(conn!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		}
+
+		return flag;
 	}
 	
 	public int passwordCheck(String password,String ConfirmPassword)
@@ -49,6 +103,42 @@ public class NewUserValidation {
 		}
 		return flag;
 		
+	}
+	
+	public int createNewUser(String name,String password)
+	{
+		Connection conn = null;
+		int flag = -1;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fuel_predictor","root","Mypassword@19");
+			Statement st = conn.createStatement();
+			String query = " insert into users(username,password) values(?,?);";
+			//ResultSet rs = st.executeQuery(query);
+			PreparedStatement preparedStmt = conn.prepareStatement(query);
+			preparedStmt.setString (1, name);
+		    preparedStmt.setString (2, password);
+		    preparedStmt.execute();
+		    flag = 1;
+
+		}
+		catch(Exception e) {
+			System.out.println("Database Error");
+			e.printStackTrace();
+			flag = 0;
+		}
+		finally{
+		      //finally block used to close resources
+		      try{
+		         if(conn!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		}
+		
+		
+		return flag;
 	}
 
 }

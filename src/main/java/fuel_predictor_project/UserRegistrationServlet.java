@@ -26,18 +26,44 @@ public class UserRegistrationServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		String name = request.getParameter("username");
 		String password = request.getParameter("pass");
+		request.setAttribute("profile", "no");
 		String confirmpassword = request.getParameter("cpass");
+		request.setAttribute("fname", " ");
+		request.setAttribute("add1", " ");
+		request.setAttribute("add2", " ");
+		request.setAttribute("city", " ");
+		request.setAttribute("state", " ");
+		request.setAttribute("zip", " ");
 		int passCheck = validateNewUser.passwordCheck(password, confirmpassword);
-		boolean isUserValid = validateNewUser.newUserValidation1(name);
-		if(isUserValid == true && passCheck==1)
+		int isUserValid = validateNewUser.newUserValidation1(name);
+		if(isUserValid == 1 && passCheck==1)
 		{
-			request.setAttribute("username", name);
-			//response.setContentType("text/html");
-			request.getRequestDispatcher("/WEB-INF/views/ProfileMgt.jsp").forward(request,response);
+			int nUser = validateNewUser.createNewUser(name,password);
+			if(nUser == 0)
+			{
+				request.setAttribute("error", "Database Connectivity Issue, Please try again");
+				response.setContentType("text/html");
+				request.getRequestDispatcher("/WEB-INF/views/ClientRegistration.jsp").forward(request,response);
+			}
+			else if(nUser == 1)
+			{
+				request.setAttribute("username", name);
+				request.setAttribute("User", name);
+				this.getServletConfig().getServletContext().setAttribute("User", name);
+				//response.setContentType("text/html");
+				request.getRequestDispatcher("/WEB-INF/views/ProfileMgtNewUser.jsp").forward(request,response);
+			}
+			
 		}
-		else if(isUserValid == false)
+		else if(isUserValid == 0)
 		{
 			request.setAttribute("error", "Username Already Exists, Please Select a new Username");
+			response.setContentType("text/html");
+			request.getRequestDispatcher("/WEB-INF/views/ClientRegistration.jsp").forward(request,response);
+		}
+		else if(isUserValid == -1)
+		{
+			request.setAttribute("error", "Database Coonectivity Issue");
 			response.setContentType("text/html");
 			request.getRequestDispatcher("/WEB-INF/views/ClientRegistration.jsp").forward(request,response);
 		}

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,21 +18,29 @@
 <body>
 
 	<div class="limiter">
+	<form class="login100-form validate-form" method = "post" action = "History.do">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="collapse navbar-collapse" id="navbarText">
   <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#">Profile Management</a>
+
+<!--        <a class="nav-link" href="ProfileMgt.html">Profile Management</a> -->
+       <button type = "submit" name="action" value="Profile Management" class="nav-link" "rules">Profile Management</a></button>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link" href="#">Quote Form</a>
+<!--       <a class="nav-link" href="History.html">History</a> -->
+		<button type = "submit" name="action" value="Quote Form" class="nav-link" "rules">Quote Form</a></button>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">History</a>
+        </li>
+        <li class="nav-item">
+<!--       <a class="nav-link" href="History.html">History</a> -->
+		<button type = "submit" name="action" value="Log Out" class="nav nav-link navbar-right" id="logout" "rules">Log Out</a></button>
     </li>
   </ul>
 </div>
 </nav>
+</form>
 		<div class="container-table100" style="background-image: url('css/images/Bk3.jfif')">
 			<div class="wrap-table100">
 				<div class="table100">
@@ -47,26 +55,28 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach items="${BL}" var="g">
 								<tr>
-									<td class="column1">25</td>
-									<td class="column2">8450 Cambrige St, Houston, TX,77054</td>
-									<td class="column3">02-18-2020</td>
-									<td class="column4">52.50</td>
-									<td class="column5">60</td>
+									<td class="column1">${g.get(0)}</td>
+									<td class="column2">${g.get(1)}</td>
+									<td class="column3">${g.get(2)}</td>
+									<td class="column4">${g.get(3)}</td>
+									<td class="column5">${g.get(4)}</td>
+								</tr>
+						</c:forEach>
+								<tr>
+									<td class="column1"></td>
+									<td class="column2"></td>
+									<td class="column3"></td>
+									<td class="column4"></td>
+									<td class="column5"></td>
 								</tr>
 								<tr>
-									<td class="column1">28</td>
-									<td class="column2">2111 Holly hall St, Houston, TX, 77054</td>
-									<td class="column3">02/18/2020</td>
-									<td class="column4">58</td>
-									<td class="column5">65</td>
-								</tr>
-								<tr>
-									<td class="column1">30</td>
-									<td class="column2">4800 Calhoun Road, Houston, TX. 77054</td>
-									<td class="column3">02/24/2020</td>
-									<td class="column4">61</td>
-									<td class="column5">72</td>
+									<td class="column1"></td>
+									<td class="column2"></td>
+									<td class="column3"></td>
+									<td class="column4"></td>
+									<td class="column5"></td>
 								</tr>
 
 								<tr>
